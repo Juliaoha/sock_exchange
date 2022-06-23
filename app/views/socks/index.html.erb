@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Socks</h1>
+
+<div id="socks">
+  <% @socks.each do |sock| %>
+    <%= render sock %>
+    <p>
+      <%= link_to "Show this sock", sock %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New sock", new_sock_path %>

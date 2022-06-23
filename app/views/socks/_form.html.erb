@@ -1,0 +1,57 @@
+<%= form_with(model: sock) do |form| %>
+  <% if sock.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sock.errors.count, "error") %> prohibited this sock from being saved:</h2>
+
+      <ul>
+        <% sock.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :size, style: "display: block" %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div>
+    <%= form.label :brand, style: "display: block" %>
+    <%= form.text_field :brand %>
+  </div>
+
+  <div>
+    <%= form.label :colour, style: "display: block" %>
+    <%= form.text_field :colour %>
+  </div>
+
+  <div>
+    <%= form.label :quality, style: "display: block" %>
+    <%= form.text_field :quality %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :foot, style: "display: block" %>
+    <%= form.text_field :foot %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
