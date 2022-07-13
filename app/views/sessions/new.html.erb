@@ -1,0 +1,19 @@
+<div class="container">
+    <main class="form-signin form">
+        <h1 class="h3 mb-3 fw-normal text-center">Log in</h1>
+
+        <%= form_with(scope: :session, url: login_path, data: { turbo: false }) do |f| %>
+            <div class="col-sm-6 m-auto">
+                <%= f.label :email, class: "form-label" %>
+                <%= f.email_field :email, class: "form-control mb-4" %>
+            </div> 
+            <div class="col-sm-6 m-auto">
+                <%= f.label :password, class: "form-label" %>
+                <%= f.password_field :password, class: "form-control mb-4" %>
+            </div>
+            <div class="col-sm-6 m-auto">
+                <%= f.submit "Log in", class: "btn btn-lg btn-primary float-end" %>
+            </div>
+        <% end %>
+    </main>
+</div>
