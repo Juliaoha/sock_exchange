@@ -1,57 +1,52 @@
-<%= form_with(model: sock) do |form| %>
-  <% if sock.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(sock.errors.count, "error") %> prohibited this sock from being saved:</h2>
+<div class="container">
+    <% if @sock.errors.any? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h2>The following errors stopped you from listing a sock</h2>
+            <ul>
+                <% @sock.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>        
+    <% end %>
 
-      <ul>
-        <% sock.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :size, style: "display: block" %>
-    <%= form.text_field :size %>
-  </div>
-
-  <div>
-    <%= form.label :brand, style: "display: block" %>
-    <%= form.text_field :brand %>
-  </div>
-
-  <div>
-    <%= form.label :colour, style: "display: block" %>
-    <%= form.text_field :colour %>
-  </div>
-
-  <div>
-    <%= form.label :quality, style: "display: block" %>
-    <%= form.text_field :quality %>
-  </div>
-
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :foot, style: "display: block" %>
-    <%= form.text_field :foot %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+    <%= form_with(model: @sock, local: true, data: { turbo: false }) do |f| %>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :title, class: "form-label" %>
+            <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :description, class: "form-label" %>
+            <%= f.text_area :description, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :size, class: "form-label" %>
+            <%= f.text_field :size, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :brand, class: "form-label" %>
+            <%= f.text_field :brand, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :colour, class: "form-label" %>
+            <%= f.text_field :colour, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :quality, class: "form-label" %>
+            <%= f.text_field :quality, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :foot, class: "form-label" %>
+            <%= f.text_field :foot, class: "form-control" %>
+        </div>
+        <div class="col-sm-6 m-auto">
+            <%= f.label :price, class: "form-label" %>
+            <%= f.text_field :price, class: "form-control"%>
+        </div>
+        <div class="col-sm-6 m-auto py-5">
+            <%= f.submit(@sock.new_record? ? "List Sock" : "Update Sock", class: "btn btn-primary") %>
+            <%= link_to "Cancel", sock_path(@sock),  class: "btn btn-danger" if !@sock.new_record? %>
+        </div>
+    <% end %>
+</div>

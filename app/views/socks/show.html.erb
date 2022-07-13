@@ -1,10 +1,27 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+    <div class="form align-middle">
+        <h1 class="text-center"><%=@sock.title%></h1>
 
-<%= render @sock %>
-
-<div>
-  <%= link_to "Edit this sock", edit_sock_path(@sock) %> |
-  <%= link_to "Back to socks", socks_path %>
-
-  <%= button_to "Destroy this sock", @sock, method: :delete %>
-</div>
+        <div class="card col-sm-6 m-auto">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Title: <%=@sock.title%></h5>
+                <p class="card-text">Description: <%=@sock.description%></p>
+                <p class="card-text">Brand: <%=@sock.brand%></p>
+                <p class="card-text">Colour: <%=@sock.colour%></p>
+                <p class="card-text">Quality: <%=@sock.quality%></p>
+                <p class="card-text">Foot: <%=@sock.foot%></p>
+                <p class="card-text">Size: <%=@sock.size%></p>
+                <p class="card-text">Price: <%=@sock.price%></p>
+                <p class="card-text"><small class="text-muted">Last updated <%=@sock.updated_at.strftime("%d-%m-%Y")%></small></p>
+                <p class="card-text"><small class="text-muted">listed by <%= @sock.user.username if @sock.user %></small></p>
+                <div class="row">
+                    <div class="buttons">
+                        <%= link_to "Edit", edit_sock_path(@sock), class: "btn btn-sm btn-outline-secondary mx-2" %>
+                        <%= button_to "Delete", @sock, :method => "delete", class: "btn btn-sm btn-danger" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
