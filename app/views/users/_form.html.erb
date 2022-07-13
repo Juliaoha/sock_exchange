@@ -1,0 +1,34 @@
+<div class="container">
+    <% if @user.errors.any? %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h2>The following errors stopped you from creating an account</h2>
+            <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>        
+    <% end %>
+    <main class="form-signin form">
+        <h1 class="h3 mb-3 fw-normal text-center"><%= @user.new_record? ? "Sign up" : "Update Account" %></h1>
+
+        <%= form_with(model: @user, local: true, data: { turbo: false }) do |f| %>
+            <div class="col-sm-6 m-auto">
+                <%= f.label :username, class: "form-label" %>
+                <%= f.text_field :username, class: "form-control mb-4" %>
+            </div>
+            <div class="col-sm-6 m-auto">
+                <%= f.label :email, class: "form-label" %>
+                <%= f.email_field :email, class: "form-control mb-4" %>
+            </div> 
+            <div class="col-sm-6 m-auto">
+                <%= f.label :password, class: "form-label" %>
+                <%= f.password_field :password, class: "form-control mb-4" %>
+            </div>
+            <div class="col-sm-6 m-auto">
+                <%= f.submit(@user.new_record? ? "Sign up" : "Update Account", class: "btn btn-lg btn-primary float-end") %>
+            </div>
+        <% end %>
+    </main>
+</div>
