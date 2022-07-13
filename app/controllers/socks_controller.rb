@@ -1,70 +1,56 @@
 class SocksController < ApplicationController
-  before_action :set_sock, only: %i[ show edit update destroy ]
+  before_action :set_sock, only: [:edit, :update, :show, :destroy]
+  # before_action :require_user, except: [:index, :show]
+  # before_action :require_same_user, only: [:edit, :update, :destroy]
 
-  # GET /socks or /socks.json
   def index
-    @socks = Sock.all
+      @socks = Sock.all
+  end
+    
+  def new
+      @sock = Sock.new
+  end
+  
+  def create
+      @sock = Sock.new(sock_params)
+      # @sock.user = current_user
+      if @sock.save
+        flash[:success] = "Sock was listed successfully"
+        redirect_to sock_path(@sock)
+      else
+        puts(@sock.errors.full_messages)
+        render 'new'
+      end
   end
 
-  # GET /socks/1 or /socks/1.json
+  def update
+      if @sock.update(sock_params)
+        flash[:success] = "Sock was successfully updated"
+        redirect_to sock_path(@sock)
+      else
+        render 'edit'
+      end
+  end
+
   def show
   end
 
-  # GET /socks/new
-  def new
-    @sock = Sock.new
-  end
-
-  # GET /socks/1/edit
   def edit
   end
 
-  # POST /socks or /socks.json
-  def create
-    @sock = Sock.new(sock_params)
-
-    respond_to do |format|
-      if @sock.save
-        format.html { redirect_to sock_url(@sock), notice: "Sock was successfully created." }
-        format.json { render :show, status: :created, location: @sock }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @sock.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /socks/1 or /socks/1.json
-  def update
-    respond_to do |format|
-      if @sock.update(sock_params)
-        format.html { redirect_to sock_url(@sock), notice: "Sock was successfully updated." }
-        format.json { render :show, status: :ok, location: @sock }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @sock.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /socks/1 or /socks/1.json
   def destroy
-    @sock.destroy
-
-    respond_to do |format|
-      format.html { redirect_to socks_url, notice: "Sock was successfully destroyed." }
-      format.json { head :no_content }
-    end
+      @sock.destroy
+      flash[:danger] = "Sock was successfully deleted"
+      redirect_to root_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sock
-      @sock = Sock.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sock_params
-      params.require(:sock).permit(:size, :brand, :colour, :quality, :price, :title, :description, :foot)
-    end
+  def set_sock
+      @sock = Sock.find(params[:id])
+  end
+
+  def sock_params
+      params.require(:sock).permit(:title, :description, :size, :brand, :price, :foot, :colour, :quality)
+  end
 end
