@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
-          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+          <p class="text-muted">Sock exchange is the place to go when you want to buy or sell single socks. With the best range of socks in the world, you'll never go anywhere else to buy your loose socks</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
@@ -21,8 +21,13 @@
     <div class="container d-flex justify-content-between">
       <%= link_to "Sock Exchange", root_path, class: "navbar-brand"  %>
       <div>
-        <%= link_to "Log in", login_path, class: "navbar-brand"  %>
-        <%= link_to "Logout", logout_path, class: "navbar-brand",  data: { turbo_method: :delete }  %>
+        <% if logged_in? %>
+          <%= link_to "Logout", logout_path, class: "navbar-brand",  data: { turbo_method: :delete }  %>
+          <%= link_to "My Account" , user_path(current_user), class: "navbar-brand"  %>
+        <% else %>
+          <%= link_to "Log in", login_path, class: "navbar-brand"  %>
+          <%= link_to "Sign up", signup_path, class: "navbar-brand"  %>
+        <% end %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

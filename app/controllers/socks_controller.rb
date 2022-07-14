@@ -1,7 +1,7 @@
 class SocksController < ApplicationController
   before_action :set_sock, only: [:edit, :update, :show, :destroy]
-  # before_action :require_user, except: [:index, :show]
-  # before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
       @socks = Sock.all
@@ -13,12 +13,11 @@ class SocksController < ApplicationController
   
   def create
       @sock = Sock.new(sock_params)
-      # @sock.user = current_user
+      @sock.user = current_user
       if @sock.save
         flash[:success] = "Sock was listed successfully"
         redirect_to sock_path(@sock)
       else
-        puts(@sock.errors.full_messages)
         render 'new'
       end
   end
@@ -52,5 +51,12 @@ class SocksController < ApplicationController
 
   def sock_params
       params.require(:sock).permit(:title, :description, :size, :brand, :price, :foot, :colour, :quality)
+  end
+
+  def require_same_user
+    if current_user != @sock.user
+      flash[:danger] = "Unable to perform that action"
+      redirect_to root_path
+    end
   end
 end

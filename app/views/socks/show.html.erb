@@ -17,8 +17,12 @@
                 <p class="card-text"><small class="text-muted">listed by <%= @sock.user.username if @sock.user %></small></p>
                 <div class="row">
                     <div class="buttons">
-                        <%= link_to "Edit", edit_sock_path(@sock), class: "btn btn-sm btn-outline-secondary mx-2" %>
-                        <%= button_to "Delete", @sock, :method => "delete", class: "btn btn-sm btn-danger" %>
+                        <% if logged_in? && current_user.id == @sock.user_id %>
+                            <%= link_to "Edit", edit_sock_path(@sock), class: "btn btn-sm btn-outline-secondary mx-2" %>
+                            <%= button_to "Delete", @sock, :method => "delete", class: "btn btn-sm btn-danger" %>
+                        <% else %>
+                            <%= link_to "Buy this sock", class: "btn btn-sm btn-outline-secondary mx-2" %>
+                        <% end %>
                     </div>
                 </div>
             </div>

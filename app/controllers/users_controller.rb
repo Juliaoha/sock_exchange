@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:edit, :update, :show]
-    before_action :require_same_user, only: [:edit, :update, :destroy]
-    before_action :require_admin, only: [:destroy]
+    before_action :set_user, only: [:edit, :update, :show, :destroy]
+    before_action :require_same_user, only: [:edit, :update, :destroy, :show]
     
     def new
       @user = User.new
@@ -12,7 +11,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         flash[:success] = "Welcome to the Alpha Blog #{@user.username}"
-        redirect_to user_path(@user)
+        redirect_to root_path
       else
         render 'new'
       end
