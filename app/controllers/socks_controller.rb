@@ -50,7 +50,7 @@ class SocksController < ApplicationController
   end
 
   def sock_params
-      params.require(:sock).permit(:title, :description, :size, :brand, :price, :foot, :colour, :quality)
+      params.require(:sock).permit(:title, :description, :size, :brand, :price, :foot, :colour, :quality, :image)
   end
 
   def require_same_user
