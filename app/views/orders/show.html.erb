@@ -1,7 +1,8 @@
 <div class="container">
     <div class="form align-middle">
-        <h1 class="text-center"><%=@sock.title%></h1>
+        <h1 class="text-center">Order no: <%=@order.id%></h1>
 
+        <h3 class="text-center"><%=@sock.title%></h3>
         <div class="card col-sm-6 m-auto">
             <%= image_tag @sock.image, class: "bd-placeholder-img card-img-top", width: "100%", height: "225" %>
             <div class="card-body">
@@ -14,17 +15,8 @@
                 <p class="card-text">Size: <%=@sock.size%></p>
                 <p class="card-text">Price: <%=@sock.price%></p>
                 <p class="card-text"><small class="text-muted">Last updated <%=@sock.updated_at.strftime("%d-%m-%Y")%></small></p>
-                <p class="card-text"><small class="text-muted">listed by <%= @sock.user.username if @sock.user %></small></p>
-                <div class="row">
-                    <div class="buttons">
-                        <% if logged_in? && current_user.id == @sock.user_id %>
-                            <%= link_to "Edit", edit_sock_path(@sock), class: "btn btn-sm btn-outline-secondary mx-2" %>
-                            <%= button_to "Delete", @sock, :method => "delete", class: "btn btn-sm btn-danger" %>
-                        <% else %>
-                            <%= link_to “Buy this sock”, orders_path({current_user_id: current_user.id, sock_id: @sock.id}), class: “btn btn-sm btn-outline-secondary mx-2" %>
-                        <% end %>
-                    </div>
-                </div>
+                <p class="card-text"><small class="text-muted">listed by <%= @sock.user.username %></small></p>
+                <p class="card-text"><small class="text-muted">purchased on <%= @order.created_at.strftime("%d-%m-%Y") %></small></p>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     
     def show
       @user_socks = @user.socks
-      @user_orders = @user.orders
+      @user_orders = Order.where(buyer_id: @user.id)
     end
     
     def destroy

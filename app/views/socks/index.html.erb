@@ -17,6 +17,7 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <% @socks.each do |sock| %>
+          <% if !sock.sold %>
             <div class="col">
               <div class="card shadow-sm">
                 <%= image_tag sock.image, class: "bd-placeholder-img card-img-top", width: "100%", height: "225" %>
@@ -32,7 +33,11 @@
                 </div>
               </div>
             </div>
-        <% end %>  
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>  
 </main>
 
 <footer class="text-muted py-5">
