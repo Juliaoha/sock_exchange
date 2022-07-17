@@ -21,7 +21,7 @@
                             <%= link_to "Edit", edit_sock_path(@sock), class: "btn btn-sm btn-outline-secondary mx-2" %>
                             <%= button_to "Delete", @sock, :method => "delete", class: "btn btn-sm btn-danger" %>
                         <% else %>
-                            <%= link_to “Buy this sock”, orders_path({current_user_id: current_user.id, sock_id: @sock.id}), class: “btn btn-sm btn-outline-secondary mx-2" %>
+                            <%= link_to "Buy this sock", orders_path({current_user_id: current_user.id, sock_id: @sock.id}), class: "btn btn-sm btn-outline-secondary mx-2" %>
                         <% end %>
                     </div>
                 </div>
