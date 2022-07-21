@@ -3,7 +3,9 @@
         <h1 class="text-center"><%=@sock.title%></h1>
 
         <div class="card col-sm-6 m-auto">
-            <%= image_tag @sock.image, class: "bd-placeholder-img card-img-top", width: "100%", height: "225" %>
+            <% if @sock.image.attached? %>
+                <%= image_tag @sock.image, class: "bd-placeholder-img card-img-top", width: "100%", height: "225" %>
+            <% end %>
             <div class="card-body">
                 <h5 class="card-title">Title: <%=@sock.title%></h5>
                 <p class="card-text">Description: <%=@sock.description%></p>

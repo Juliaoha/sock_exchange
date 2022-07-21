@@ -10,7 +10,9 @@
         <% @user_socks.each do |sock| %>
         <div class="col">
             <div class="card shadow-sm">
-            <%= image_tag sock.image, class: "bd-placeholder-img card-img-top", width: "100%", height: "225" %>
+            <% if sock.image.attached? %>
+                <%= image_tag sock.image, class: "bd-placeholder-img card-img-top", width: "100%", height: "225" %>
+            <% end %>
             <div class="card-body">
                 <p class="card-text"><%=sock.title%></p>
                 <p class="card-text">$<%=sock.price%></p>
